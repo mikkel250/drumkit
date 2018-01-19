@@ -1,0 +1,29 @@
+Make a div with class of "keys" and put a bunch of other
+divs inside with the various labels
+
+When the user presses a key, the page will play a sound and
+do a little animation on the page. To find the keycodes, go to
+keycode.info
+(a little page he coded up to quickly look up the codes for keys
+when they are pressed)
+
+The tag on the html page is going to be audio data-key (he explains
+why in the video https://www.youtube.com/watch?v=VuN8qwZoego). E.g.
+<audio data-key="65" src="sounds/clap.wav"></audio>
+
+Add a listener (to the whole page in this case)
+window.addEventListener('keydown', function(e)) {
+    const audio = document.querySelector(`audio[data-key="${e.keycode}"]`);
+    if (!audio) return; //stop the function from running altogether if there's no audio element associated with the key pressed
+    audio.currentTime = 0; //rewind to the start if keys pressed quickly
+    audio.play();
+    key.classList.add('playing');
+});
+
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => key.addEventListener('transitioned', removeTransition));
+
+
+
+
+
